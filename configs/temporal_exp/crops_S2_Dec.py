@@ -1,0 +1,65 @@
+_base_=['../hyper_benefits/crops_S2_jun.py',]
+custom_imports = dict(imports=['H2Crop'], allow_failed_imports=False)
+
+img_size=192
+input_seq_len=12
+num_frames=12
+with_priors=False
+swin_in_embed_dim=128
+embed_dim=1024
+with_hyper=False
+head_embed_dim=256 if with_hyper else 128
+hyper_img_size=64
+
+experiment_name='crops_S2_Dec'
+work_dir=r'../checkpoints/temporal_exp/%s'%experiment_name
+
+
+
+train_dataloader = dict(
+
+    dataset=dict(
+        with_priors=with_priors,
+        input_seq_len=input_seq_len,
+        num_frames=num_frames,
+        with_hyper=with_hyper,
+    ))
+
+val_dataloader = dict(
+    dataset=dict(
+        with_priors=with_priors,
+        input_seq_len=input_seq_len,
+        num_frames=num_frames,
+        with_hyper=with_hyper,
+    ))
+
+test_dataloader = dict(
+    dataset=dict(
+        with_priors=with_priors,
+        input_seq_len=input_seq_len,
+        num_frames=num_frames,
+        with_hyper=with_hyper,
+    ))
+
+
+model=dict(
+    encoders=dict(
+        encoders_cfg=dict(
+            S2=dict(
+                    backbone_cfg=dict(
+                        downsample_steps=((2, 2, 2), (2, 2, 2), (2, 2, 2), (2, 2, 2)),
+                    ),
+                ),
+        ),
+    ),
+    neck=dict(
+        in_fusion_key_list=({'S2':512*2,},
+                            {'S2':256*3,},
+                            {'S2':128*6,},
+                            ),
+    ),
+
+)
+
+
+test_evaluator = dict(save_metric_file=work_dir+'/test_results.csv',)
