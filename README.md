@@ -7,7 +7,7 @@
 
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
-[![arXiv](https://img.shields.io/badge/arXiv-2505.21357-b31b1b.svg)]()
+[![arXiv](https://img.shields.io/badge/arXiv-2506.06155-b31b1b.svg)](https://arxiv.org/abs/2506.06155)
 
 <div align="center">
     <img src="resources/method.png" />
@@ -16,7 +16,7 @@
 ## Introduction
 
 This repository is the code implementation of the paper 
-[A Novel Large-scale Crop Dataset and Dual-stream Transformer Method for Fine-grained Hierarchical Crop Classification from  Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series]().
+[A Novel Large-scale Crop Dataset and Dual-stream Transformer Method for Fine-grained Hierarchical Crop Classification from  Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series](https://arxiv.org/abs/2506.06155).
 
 We construct a hierarchical hyperspectral crop dataset (H2Crop) by integrating 30m-resolution EnMAP hyperspectral data with Sentinel-2 time series. With over one million annotated field parcels organized in a four-tier crop taxonomy, H2Crop establishes a vital benchmark for fine-grained agricultural crop classification and hyperspectral image processing. We propose a dual-stream Transformer architecture that synergistically processes these modalities. It coordinates two specialized pathways: a spectral-spatial Transformer extracts fine-grained signatures from hyperspectral EnMAP data, while a temporal Swin Transformer extracts crop growth patterns from Sentinel-2 time series. The designed hierarchy classification heads with hierarchical fusion then simultaneously delivers multi-level classification across all taxonomic tiers.
 Experiments demonstrate that adding hyperspectral EnMAP data to Sentinel-2 time series yields a 4.2% average F1-scores improvement (peaking at 6.3%). Extensive comparisons also confirming our method's higher accuracy over existing deep learning approaches for crop type classification and the consistent benefits of hyperspectral data across varying temporal windows and crop change scenarios.
@@ -26,8 +26,8 @@ Experiments demonstrate that adding hyperspectral EnMAP data to Sentinel-2 time 
 - [Introduction](#Introduction)
 - [Table of Contents](#Table-of-Contents)
 - [Installation](#Installation)
-- [Dataset Preparation](#Dataset-Preparation)
-- [Model Usage](#Model-Training)
+- [H²Crop Dataset](#H²Crop-Dataset)
+- [Model Usage](#Model-Usage)
 - [Citation](#Citation)
 - [License](#License)
 - [Contact](#Contact)
@@ -46,7 +46,7 @@ Experiments demonstrate that adding hyperspectral EnMAP data to Sentinel-2 time 
 
 We recommend using Miniconda for installation. The following command will create a virtual environment named `H2Crop` and install PyTorch,GDAL and other libraries.
 
-Note: If you have experience with Conda, pytorch, GDAL and have already installed them, you can skip to the next section. Otherwise, you can follow these steps to prepare.
+Note: If you have experience with Conda, pytorch and have already installed them, you can skip to the next section. Otherwise, you can follow these steps to prepare.
 
 <details>
 
@@ -109,7 +109,7 @@ pip install ftfy tqdm regex h5py prettytable timm scipy einops numpy==1.26.2
 </details>
 
 ## H²Crop Dataset
-Download the dataset from [H2Crop](https://glass.hku.hk/casual/Release/H2Crop/).
+Download the dataset from [H2Crop](https://glass.hku.hk/casual/H2Crop/).
 
 ### Overview
 The H²Crop dataset is a large-scale benchmark for hierarchical crop classification, combining 30m-resolution EnMAP hyperspectral imagery with 10m-resolution Sentinel-2 time series across France's agricultural regions. It features:
@@ -156,7 +156,7 @@ Each HDF5 file contains these standardized groups:
 | `/prior` | (4, 192, 192)      | uint8  | Crop types from last year (L1-L4)     |
 
 
-## Model Training and Testing
+## Model Usage
 
 ### Configuration Files
 All model configurations are stored in `configs/` directory with naming convention:  
@@ -177,12 +177,13 @@ All model configurations are stored in `configs/` directory with naming conventi
 ### Pre-trained Weights
 The models for S2 data is designed based on [AgriFM](https://github.com/flyakon/AgriFM), so you need to download the pre-trained weights of AgriFM first.
 ```bash
-wget https://glass.hku.hk/casual/Release/AgriFM/AgriFM.pth -P ../checkpoints/
+wget https://glass.hku.hk/casual/AgriFM/AgriFM.pth -P ../checkpoints/
 ```
 
 
 ### Training Commands
 Take `crops_S2_H_jun.py` as an example, which trains a model with Sentinel-2 and EnMAP data for the first half of the year (January to June).
+
 **Single GPU**:
 ```bash
 python train.py configs/hyper_benefits/crops_S2_H_jun.py
@@ -209,7 +210,7 @@ python test.py \
 best_mFscore_epoch_xx.pth is the best model weights saved during training. You need to replace it with the actual path of the model weights you want to test.
 
 
-> **Note**: Model weights will be available soon in [weights](https://glass.hku.hk/casual/Release/AgriFM/).
+> **Note**: Model weights will be available soon in [weights](https://glass.hku.hk/casual/H2Crop/).
 
 
 ## Citation
@@ -217,7 +218,15 @@ best_mFscore_epoch_xx.pth is the best model weights saved during training. You n
 If you use the code or performance benchmarks of this project in your research, please refer to the bibtex below to cite.
 
 ```
-
+@misc{li2025novellargescalecropdataset,
+      title={A Novel Large-scale Crop Dataset and Dual-stream Transformer Method for Fine-grained Hierarchical Crop Classification from Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series}, 
+      author={Wenyuan Li and Shunlin Liang and Yuxiang Zhang and Liqin Liu and Keyan Chen and Yongzhe Chen and Han Ma and Jianglei Xu and Yichuan Ma and Shikang Guan and Zhenwei Shi},
+      year={2025},
+      eprint={2506.06155},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2506.06155}, 
+}
 ```
 
 ## License
