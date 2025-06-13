@@ -218,8 +218,8 @@ best_mFscore_epoch_xx.pth is the best model weights saved during training. You n
 If you use the code or performance benchmarks of this project in your research, please refer to the bibtex below to cite.
 
 ```
-@misc{li2025novellargescalecropdataset,
-      title={A Novel Large-scale Crop Dataset and Dual-stream Transformer Method for Fine-grained Hierarchical Crop Classification from Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series}, 
+@misc{li2025finegrainedhierarchicalcroptype,
+      title={Fine-grained Hierarchical Crop Type Classification from Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series: A Large-scale Dataset and Dual-stream Transformer Method}, 
       author={Wenyuan Li and Shunlin Liang and Yuxiang Zhang and Liqin Liu and Keyan Chen and Yongzhe Chen and Han Ma and Jianglei Xu and Yichuan Ma and Shikang Guan and Zhenwei Shi},
       year={2025},
       eprint={2506.06155},
