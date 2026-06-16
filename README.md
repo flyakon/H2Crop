@@ -7,7 +7,6 @@
 
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-green)](LICENSE)
-[![arXiv](https://img.shields.io/badge/arXiv-2506.06155-b31b1b.svg)](https://arxiv.org/abs/2506.06155)
 
 <div align="center">
     <img src="resources/method.png" />
@@ -16,10 +15,10 @@
 ## Introduction
 
 This repository is the code implementation of the paper 
-[Fine-grained Hierarchical Crop Type Classification from Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series: A Large-scale Dataset and Dual-stream Transformer Method](https://arxiv.org/abs/2506.06155).
+[Fine-grained Hierarchical Crop Type Classification from Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series: A Large-scale Dataset and Dual-stream Transformer Method](https://www.sciencedirect.com/science/article/pii/S0034425726002956).
 
 We construct a hierarchical hyperspectral crop dataset (H2Crop) by integrating 30m-resolution EnMAP hyperspectral data with Sentinel-2 time series. With over one million annotated field parcels organized in a four-tier crop taxonomy, H2Crop establishes a vital benchmark for fine-grained agricultural crop classification and hyperspectral image processing. We propose a dual-stream Transformer architecture that synergistically processes these modalities. It coordinates two specialized pathways: a spectral-spatial Transformer extracts fine-grained signatures from hyperspectral EnMAP data, while a temporal Swin Transformer extracts crop growth patterns from Sentinel-2 time series. The designed hierarchy classification heads with hierarchical fusion then simultaneously delivers multi-level classification across all taxonomic tiers.
-Experiments demonstrate that adding hyperspectral EnMAP data to Sentinel-2 time series yields a 4.2% average F1-scores improvement (peaking at 6.3%). Extensive comparisons also confirming our method's higher accuracy over existing deep learning approaches for crop type classification and the consistent benefits of hyperspectral data across varying temporal windows and crop change scenarios.
+Experiments demonsatrate that adding hyperspectral EnMAP data to Sentinel-2 time series yields a 4.2% average F1-scores improvement (peaking at 6.3%). Extensive comparisons also confirming our method's higher accuracy over existing deep learning approaches for crop type classification and the consistent benefits of hyperspectral data across varying temporal windows and crop change scenarios.
 
 ## Table of Contents
 
@@ -109,7 +108,8 @@ pip install ftfy tqdm regex h5py prettytable timm scipy einops numpy==1.26.2
 </details>
 
 ## H²Crop Dataset
-Download the dataset from [H2Crop](https://glass.hku.hk/casual/H2Crop/).
+Download the dataset from [H2Crop](https://glass.hku.hk/casual/H2Crop/). 
+Considering the accuracy and computational efficiency of the taks, the currently released version is the **single-scene subset (2022–2023)** described in our paper, which is also the core benchmark used for all main experiments in this work. 
 
 ### Overview
 The H²Crop dataset is a large-scale benchmark for hierarchical crop classification, combining 30m-resolution EnMAP hyperspectral imagery with 10m-resolution Sentinel-2 time series across France's agricultural regions. It features:
@@ -218,14 +218,16 @@ best_mFscore_epoch_xx.pth is the best model weights saved during training. You n
 If you use the code or performance benchmarks of this project in your research, please refer to the bibtex below to cite.
 
 ```
-@misc{li2025finegrainedhierarchicalcroptype,
-      title={Fine-grained Hierarchical Crop Type Classification from Integrated Hyperspectral EnMAP Data and Multispectral Sentinel-2 Time Series: A Large-scale Dataset and Dual-stream Transformer Method}, 
-      author={Wenyuan Li and Shunlin Liang and Yuxiang Zhang and Liqin Liu and Keyan Chen and Yongzhe Chen and Han Ma and Jianglei Xu and Yichuan Ma and Shikang Guan and Zhenwei Shi},
-      year={2025},
-      eprint={2506.06155},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2506.06155}, 
+@article{LI2026115525,
+    title = {Fine-grained hierarchical crop type classification from integrated hyperspectral EnMAP data and multispectral sentinel-2 time series: A large-scale dataset and dual-stream transformer method},
+    journal = {Remote Sensing of Environment},
+    volume = {344},
+    pages = {115525},
+    year = {2026},
+    issn = {0034-4257},
+    doi = {https://doi.org/10.1016/j.rse.2026.115525},
+    url = {https://www.sciencedirect.com/science/article/pii/S0034425726002956},
+    author = {Wenyuan Li and Shunlin Liang and Yuxiang Zhang and Liqin Liu and Keyan Chen and Yongzhe Chen and Han Ma and Jianglei Xu and Yichuan Ma and Shikang Guan and Zhenwei Shi},
 }
 ```
 
